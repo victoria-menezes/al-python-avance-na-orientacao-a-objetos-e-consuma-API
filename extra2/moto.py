@@ -7,3 +7,6 @@ class Moto(Veiculo):
     
     def __str__(self):
         return '{} {}, tipo {} | {}'.format(self._marca, self._modelo, self._tipo, 'Ligado' if self._ligado else 'Desligado')
+
+    def ligar(self):
+        self._ligado = True

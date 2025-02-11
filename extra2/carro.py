@@ -9,3 +9,5 @@ class Carro(Veiculo):
     def __str__(self):
         return '{} {} {}, {} portas | {}'.format(self._marca, self._modelo, self._cor, self._portas, 'Ligado' if self._ligado else 'Desligado')
     
+    def ligar(self):
+        self._ligado = True
