@@ -7,3 +7,10 @@ class Prato(ItemCardapio): # vai herdar os atributos de ItemCardapio
     
     def __str__(self):
         return self._nome
+    
+    @property
+    def descricao(self):
+        return self._descricao.capitalize()
+    
+    def aplicar_desconto(self):
+        self._preco -= self._preco*0.05

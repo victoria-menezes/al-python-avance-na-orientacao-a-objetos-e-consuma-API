@@ -1,4 +1,5 @@
 from modelos.avaliacao import Avaliacao
+from modelos.cardapio.item_cardapio import ItemCardapio
 
 class Restaurante:
     # Variáveis criadas fora do __init__ são compartilhadas por todos os objetos da mesma classe
@@ -11,6 +12,7 @@ class Restaurante:
         self._categoria = categoria.upper()  # deixa tudo maiúsculo
         self._ativo = False
         self._avaliacoes = []
+        self._cardapio = []
         Restaurante.restaurantes.append(self) # Adicionar o objeto criado à lista restaurantes
     
     def __str__(self):
@@ -32,7 +34,6 @@ class Restaurante:
         else:
             media = sum(a._nota for a in self._avaliacoes) / len(self._avaliacoes)
             return '{:.1f}'.format(media)
-    
 
     @classmethod # É um método da classe, não de um objeto específico
     def listar_restaurantes(cls):
@@ -40,13 +41,27 @@ class Restaurante:
         for r in cls.restaurantes:
             print(r)
     
+    @property
+    def listar_cardapio(self):
+        print('Cardápio do restaurante {} \n'.format(self._nome))
+        for i, item in enumerate(self._cardapio, start=1): # enumerate adicionar um counter para cara item, comecando em 1 (em vez de 0)
+            mensagem = '{}. Nome: {} | Preço: R${:.2f}'.format(i, item._nome, item._preco)
+            if hasattr(item, 'tipo'):
+                mensagem += ' | Tipo: {}'.format(item.tipo)
+            if hasattr(item,'_descricao'):
+                mensagem += ' | Descrição: {}'.format(item.descricao)
+            if hasattr(item, 'tamanho'): 
+                mensagem += ' | Tamanho: {}'.format(item.tamanho)
+            print(mensagem)
 
     def alternar_estado(self):
         self._ativo = not self._ativo
     
-    def receber_avaliacao(self, cliente, nota):
+    def adicionar_avaliacao(self, cliente, nota):
         if 0 <= nota <=5:
             avaliacao = Avaliacao(cliente, nota)
             self._avaliacoes.append(avaliacao)
     
-    
+    def adicionar_item_cardapio(self, item):
+        if isinstance(item, ItemCardapio):
+            self._cardapio.append(item)
