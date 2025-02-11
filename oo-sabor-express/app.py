@@ -1,17 +1,17 @@
 from modelos.restaurante import Restaurante
+from modelos.cardapio.bebida import Bebida
+from modelos.cardapio.prato import Prato
 
 # Um objeto = uma instancia de uma classe
 restaurante_praca = Restaurante('praça', 'Gourmet')
 restaurante_mexicano = Restaurante('Mexican Food', 'Mexicana')
 restaurante_japones = Restaurante('sushi rolls', 'Japonesa')
 
-def main ():
-    restaurante_praca.receber_avaliacao('Gui', 10)
-    restaurante_praca.receber_avaliacao('Laís', 8)
-    restaurante_praca.receber_avaliacao('Emy', 2)
+bebida_suco = Bebida('Suco de Melancia', 5.0, 'grande')
+prato_paozinho = Prato('Pãozinho', 2.00, 'Melhor pão da cidade')
 
-    Restaurante.alternar_estado(restaurante_mexicano)
-    Restaurante.listar_restaurantes()
+def main():
+    pass
 
     
 if __name__ == '__main__':
